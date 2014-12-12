@@ -21,6 +21,7 @@ namespace Radium\Templating\Engines;
 use Exception;
 use Radium\Templating\EngineInterface;
 use Radium\Language;
+use Radium\Routing\Router;
 
 /**
  * PHP "template" renderer.
@@ -116,6 +117,11 @@ class PhpEngine implements EngineInterface
         // Shortcut for Language::date()
         $l = function($format, $timestamp = null) {
             return Language::date($format, $timestamp);
+        };
+
+        // Shortcut for Router::generateUrl()
+        $route = function($path, array $tokens = []) {
+            return Router::generateUrl($path, $tokens);
         };
 
         ob_start();
