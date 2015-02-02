@@ -1,7 +1,7 @@
 <?php
 /*!
- * Radium
- * Copyright 2011-2014 Jack Polgar
+ * Avalon
+ * Copyright 2011-2015 Jack Polgar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,19 @@
  * limitations under the License.
  */
 
-namespace Radium\Templating\Engines;
+namespace Avalon\Templating\Engines;
 
 use Exception;
-use Radium\Templating\EngineInterface;
-use Radium\Language;
-use Radium\Routing\Router;
+use Avalon\Templating\EngineInterface;
+use Avalon\Language;
+use Avalon\Routing\Router;
 
 /**
  * PHP "template" renderer.
  *
- * @since 2.0.0
+ * @package Avalon\Templating
  * @author Jack Polgar <jack@polgar.id.au>
+ * @since 2.0.0
  */
 class PhpEngine implements EngineInterface
 {
@@ -95,7 +96,8 @@ class PhpEngine implements EngineInterface
         $templatePath = $this->find($template);
 
         if (!$templatePath) {
-            throw new Exception("Unable to find template [$template]");
+            $paths = implode(', ', $this->paths);
+            throw new Exception("Unable to find template [$template] searched in [{$paths}]");
         }
 
         // View variables
