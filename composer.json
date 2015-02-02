@@ -1,7 +1,7 @@
 {
-    "name": "radium/templating",
-    "description": "Radium Templating Component.",
-    "keywords": ["radium", "framework", "templating"],
+    "name": "avalon/templating",
+    "description": "Avalon Templating Component.",
+    "keywords": ["avalon", "framework", "templating"],
     "license": "Apache-2.0",
     "authors": [
         {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Radium\\Templating\\": ""
+            "Avalon\\Templating\\": "src/"
         }
     },
     "extra": {
