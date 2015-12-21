@@ -1,7 +1,7 @@
 <?php
 /*!
  * Avalon
- * Copyright 2011-2015 Jack Polgar
+ * Copyright 2011-2015 Jack P.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ use Avalon\Templating\EngineInterface;
  * Adds support for multiple rendering engines.
  *
  * @package Avalon\Templating
- * @author Jack Polgar <jack@polgar.id.au>
+ * @author Jack P.
  * @since 2.0.0
  */
 class DelegationEngine implements EngineInterface
