@@ -1,7 +1,7 @@
 <?php
 /*!
  * Avalon
- * Copyright 2011-2015 Jack Polgar
+ * Copyright 2011-2015 Jack P.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ use Avalon\Routing\Router;
  * PHP "template" renderer.
  *
  * @package Avalon\Templating
- * @author Jack Polgar <jack@polgar.id.au>
+ * @author Jack P.
  * @since 2.0.0
  */
 class PhpEngine implements EngineInterface
@@ -105,26 +105,6 @@ class PhpEngine implements EngineInterface
         foreach ($variables as $_name => $_value) {
             $$_name = $_value;
         }
-
-        // Shortcut for escaping HTML
-        $e = function($string) {
-            return htmlspecialchars($string);
-        };
-
-        // Shortcut for Language::translate()
-        $t = function($string, array $vars = array()) {
-            return Language::translate($string, $vars);
-        };
-
-        // Shortcut for Language::date()
-        $l = function($format, $timestamp = null) {
-            return Language::date($format, $timestamp);
-        };
-
-        // Shortcut for Router::generateUrl()
-        $route = function($path, array $tokens = []) {
-            return Router::generateUrl($path, $tokens);
-        };
 
         ob_start();
         include($templatePath);

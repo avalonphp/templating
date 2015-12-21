@@ -1,7 +1,7 @@
 <?php
 /*!
  * Avalon
- * Copyright 2011-2015 Jack Polgar
+ * Copyright 2011-2015 Jack P.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ use Avalon\Templating\EngineInterface;
  * View renderer.
  *
  * @package Avalon\Templating
- * @author Jack Polgar <jack@polgar.id.au>
+ * @author Jack P.
  * @since 0.1.0
  */
 class View
@@ -113,5 +113,13 @@ class View
     public static function exists($template)
     {
         return static::$engine->exists($template);
+    }
+
+    /**
+     * Load the shortcut functions file.
+     */
+    public static function loadFunctions()
+    {
+        require __DIR__ . '/functions.php';
     }
 }
