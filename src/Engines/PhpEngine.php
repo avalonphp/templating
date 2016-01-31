@@ -1,7 +1,7 @@
 <?php
 /*!
  * Avalon
- * Copyright 2011-2015 Jack P.
+ * Copyright 2011-2016 Jack P.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ namespace Avalon\Templating\Engines;
 
 use Exception;
 use Avalon\Templating\EngineInterface;
+use Avalon\Templating\View;
+use Avalon\Templating\SafeObject;
 use Avalon\Language;
 use Avalon\Routing\Router;
 
@@ -102,9 +104,23 @@ class PhpEngine implements EngineInterface
 
         // View variables
         $variables = $locals + $this->globals;
-        foreach ($variables as $_name => $_value) {
-            $$_name = $_value;
+        // extract($variables, EXTR_SKIP);
+
+        foreach ($variables as $__name => $__value) {
+            // if (is_object($__value) && method_exists($__value, '__toArray')) {
+            //     $__value = $__value->__toArray();
+            // }
+
+            // if (is_string($__value) && $__name !== 'content') {
+            //     $__value = htmlspecialchars($__value);
+            // } elseif (is_array($__value)) {
+            //     $__value = array_map([$this, 'escape'], $__value);
+            // }
+
+            $$__name = $__name == 'content' ? $__value : View::escape($__value);
         }
+
+        unset($paths, $variables, $locals);
 
         ob_start();
         include($templatePath);

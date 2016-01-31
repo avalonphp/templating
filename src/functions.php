@@ -1,7 +1,7 @@
 <?php
 /*!
  * Avalon
- * Copyright 2011-2015 Jack P.
+ * Copyright 2011-2016 Jack P.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,18 @@ use Avalon\Routing\Router;
 function e($string)
 {
     return htmlspecialchars($string);
+}
+
+/**
+ * Shortcut for `htmlspecialchars_decode`.
+ *
+ * @param string $string
+ *
+ * @return string
+ */
+function raw($value)
+{
+    return htmlspecialchars_decode($value);
 }
 
 /**

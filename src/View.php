@@ -1,7 +1,7 @@
 <?php
 /*!
  * Avalon
- * Copyright 2011-2015 Jack P.
+ * Copyright 2011-2016 Jack P.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,6 +101,27 @@ class View
     public static function render($template, array $locals = [])
     {
         return static::$engine->render($template, $locals);
+    }
+
+    /**
+     * Escape the given value. If the value is an object or an array of an object,
+     * wrap it in the `SafeObject` class.
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public static function escape($value)
+    {
+        if (is_string($value)) {
+            $value = htmlspecialchars($value);
+        } elseif (is_array($value)) {
+            $value = array_map([get_called_class(), 'escape'], $value);
+        } elseif (is_object($value)) {
+            $value = new SafeObject($value);
+        }
+
+        return $value;
     }
 
     /**
