@@ -17,6 +17,7 @@
  */
 
 use Avalon\Routing\Router;
+use Avalon\Templating\SafeObject;
 
 /**
  * Shortcut for `htmlspecialchars`.
@@ -39,6 +40,10 @@ function e($string)
  */
 function raw($value)
 {
+    if ($value instanceof SafeObject) {
+        return $value->getObject();
+    }
+
     return htmlspecialchars_decode($value);
 }
 
