@@ -18,6 +18,8 @@
 
 namespace Avalon\Templating;
 
+use ArrayAccess;
+
 /**
  * The "Safe Object" class, used to get escaped values from objects in views.
  *
@@ -25,7 +27,7 @@ namespace Avalon\Templating;
  * @author Jack P.
  * @since 4.0.0
  */
-class SafeObject
+class SafeObject implements ArrayAccess
 {
     /**
      * @var object
@@ -38,6 +40,11 @@ class SafeObject
     public function __construct($object)
     {
         $this->object = $object;
+    }
+
+    public function getObject()
+    {
+        return $this->object;
     }
 
     /**
@@ -69,5 +76,28 @@ class SafeObject
         return method_exists($this->object, '__toString')
                 ? $this->object->__toString()
                 : '[object: ' . get_called_class() . ']';
+    }
+
+    // -------------------------------------------------------------------------
+    // ArrayAccess
+
+    public function offsetExists($offset)
+    {
+        return isset($this->object->{$offset});
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->__get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $this->object->{$offset} = $value;
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($this->object->{$offset});
     }
 }
