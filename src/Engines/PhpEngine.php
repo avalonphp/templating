@@ -46,7 +46,14 @@ class PhpEngine implements EngineInterface
      *
      * @var array
      */
-    protected $globals = array();
+    protected $globals = [];
+
+    /**
+     * Whether or not to escape variables.
+     *
+     * @var boolean
+     */
+    public $escapeVariables = true;
 
     /**
      * @return string
@@ -105,12 +112,15 @@ class PhpEngine implements EngineInterface
         // View variables
         $variables = $locals + $this->globals;
 
-            // }
-
-            $$__name = $__name == 'content' ? $__value : View::escape($__value);
+        if ($this->escapeVariables) {
+            foreach ($variables as $__name => $__value) {
+                $$__name = $__name == 'content' ? $__value : View::escape($__value);
+            }
+        } else {
+            extract($variables);
         }
 
-        unset($paths, $variables, $locals);
+        unset($paths, $variables, $locals, $__name, $__value);
 
         ob_start();
         include($templatePath);
