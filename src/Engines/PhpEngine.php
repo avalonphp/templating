@@ -104,17 +104,7 @@ class PhpEngine implements EngineInterface
 
         // View variables
         $variables = $locals + $this->globals;
-        // extract($variables, EXTR_SKIP);
 
-        foreach ($variables as $__name => $__value) {
-            // if (is_object($__value) && method_exists($__value, '__toArray')) {
-            //     $__value = $__value->__toArray();
-            // }
-
-            // if (is_string($__value) && $__name !== 'content') {
-            //     $__value = htmlspecialchars($__value);
-            // } elseif (is_array($__value)) {
-            //     $__value = array_map([$this, 'escape'], $__value);
             // }
 
             $$__name = $__name == 'content' ? $__value : View::escape($__value);
