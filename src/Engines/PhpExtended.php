@@ -59,11 +59,9 @@ class PhpExtended extends PhpEngine
      */
     protected $extends;
 
-    public function __construct()
-    {
-        $this->startingLevel = ob_get_level();
-    }
-
+    /**
+     * @return string
+     */
     public function name()
     {
         return 'PhpExtended';
@@ -160,11 +158,16 @@ class PhpExtended extends PhpEngine
      * Start a section with the specified name.
      *
      * @param string $name
+     * @param mixed  $content section content if not using the block style.
      */
-    protected function startSection($name)
+    protected function startSection($name, $content = null)
     {
-        $this->sectionStack[] = $name;
-        ob_start();
+        if ($content) {
+            $this->sections[$name] = $content;
+        } else {
+            $this->sectionStack[] = $name;
+            ob_start();
+        }
     }
 
     /**
