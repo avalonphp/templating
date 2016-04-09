@@ -67,6 +67,14 @@ class SafeObject implements ArrayAccess
     {
         return View::escape(call_user_func_array([$this->object, $method], $args));
     }
+    
+    /**
+     * @return mixed
+     */
+    public function __invoke()
+    {
+        return View::escape(call_user_func_array($this->object, func_get_args()));
+    }
 
     /**
      * @return string
