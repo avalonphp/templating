@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 
+use Avalon\Http\Request;
 use Avalon\Routing\Router;
 use Avalon\Templating\SafeObject;
 
@@ -50,7 +51,7 @@ function raw($value)
 /**
  * Shortcut for `Avalon\Language::translate()`.
  *
- * @see \Avalon\Language::translate()`
+ * @see \Avalon\Language::translate()
  */
 function t($string, $replacements = [])
 {
@@ -60,11 +61,21 @@ function t($string, $replacements = [])
 /**
  * Shortcut for `Avalon\Language::date()`.
  *
- * @see \Avalon\Language::date()`
+ * @see \Avalon\Language::date()
  */
 function l($format, $timestamp = null)
 {
     return call_user_func_array(['\Avalon\Language', 'date'], func_get_args());
+}
+
+/**
+ * Shortcut for `Avalon\Http\Request::baseUrl()`.
+ *
+ * @see \Avalon\Http\Request::baseUrl()
+ */
+function baseUrl($append = null)
+{
+    return Request::basePath($append);
 }
 
 /**
